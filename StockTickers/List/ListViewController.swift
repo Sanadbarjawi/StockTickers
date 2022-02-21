@@ -43,12 +43,13 @@ final class ListViewController: UIViewController {
     }
     
     private func setUpCollectionView() {
-        contentView.collectionView.register(
-            StockCollectionCell.self,
-            forCellWithReuseIdentifier: StockCollectionCell.identifier)
-        contentView.collectionView.register(
-            NewsCollectionCell.self,
-            forCellWithReuseIdentifier: NewsCollectionCell.identifier)
+        let stockCell = UINib(nibName: StockCollectionViewCell.identifier, bundle: nil)
+        contentView.collectionView.register(stockCell,
+                                            forCellWithReuseIdentifier: StockCollectionViewCell.identifier)
+        let newsCell = UINib(nibName: NewsCollectionViewCell.identifier, bundle: nil)
+        contentView.collectionView.register(newsCell,
+                                            forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
+        
     }
     
     private func setUpBindings() {
@@ -106,17 +107,17 @@ final class ListViewController: UIViewController {
             if let stock = item as? Stock {
                 //stock
                 let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: StockCollectionCell.identifier,
-                    for: indexPath) as? StockCollectionCell
+                    withReuseIdentifier: StockCollectionViewCell.identifier,
+                    for: indexPath) as? StockCollectionViewCell
                 cell?.viewModel = StockCellViewModel(stock: stock)
                 return cell
                 
             } else if let article = item as? Article {
                 //stock
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: NewsCollectionCell.identifier,
-                    for: indexPath) as? NewsCollectionCell
-                cell?.viewModel = NewsCellViewModel(article: article)
+               guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: NewsCollectionViewCell.identifier,
+                    for: indexPath) as? NewsCollectionViewCell else {return UICollectionViewCell()}
+                cell.viewModel = NewsCellViewModel(article: article)
                 return cell
                 
             } else {

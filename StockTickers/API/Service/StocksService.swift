@@ -40,8 +40,9 @@ final class StocksService: StocksServiceProtocol {
                     return
                 }
                 do {
-                    let stocks = try JSONDecoder().decode([Stock].self, from: data)
-                    promise(.success(stocks))
+                    let stocksString = String(data: data, encoding: .utf8)
+//                    let csvRows = stocksString?.csv()
+//                    promise(.success(stocks))
                 } catch {
                     promise(.failure(ServiceError.decode))
                 }
