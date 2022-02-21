@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CSVImporter
 
 enum ServiceError: Error {
     case url(URLError)
@@ -39,11 +40,18 @@ final class StocksService: StocksServiceProtocol {
                     }
                     return
                 }
-                do {
-                    let stocksString = String(data: data, encoding: .utf8)
-//                    let csvRows = stocksString?.csv()
-//                    promise(.success(stocks))
-                } catch {
+                if let stocksString = String(data: data, encoding: .utf8) {
+                    let importer = CSVImporter<Stock>(contentString: stocksString)
+                    importer.startImportingRecords { recordValues -> Stock in
+                        
+                        return Stock(title: recordValues[0], value: recordValues[1])
+                        
+                    }.onFinish { stocks in
+                        var mutatingStocks: [Stock] = stocks
+                        mutatingStocks.removeFirst()
+                        promise(.success(mutatingStocks))
+                    }
+                } else {
                     promise(.failure(ServiceError.decode))
                 }
             }

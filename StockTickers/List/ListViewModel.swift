@@ -65,14 +65,10 @@ extension ListViewModel {
     }
     
     func fetchStocks() {
-        state = .loading
-        
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
-            case .failure:
-                self?.state = .error(.stocksFetch)
-            case .finished:
-                self?.state = .finishedLoading
+            case .failure: self?.state = .error(.stocksFetch)
+            case .finished: break
             }
         }
         

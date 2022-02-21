@@ -1,0 +1,6 @@
+framework module Pods_StockTickers {
+  umbrella header "Pods-StockTickers-umbrella.h"
+
+  export *
+  module * { export * }
+}

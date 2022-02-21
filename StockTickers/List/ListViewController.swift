@@ -26,6 +26,7 @@ final class ListViewController: UIViewController {
     }
     
     override func loadView() {
+        
         view = contentView
     }
     
@@ -38,7 +39,12 @@ final class ListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchStocks()
+        
+        Timer.publish(every: 1, tolerance: .none, on: RunLoop.main, in: RunLoop.Mode.common, options: nil)
+            .autoconnect()
+            .sink(receiveCompletion: {_ in}) { [weak self] _ in self?.viewModel.fetchStocks() }
+            .store(in: &bindings)
+        
         viewModel.fetchNewsFeed()
     }
     
