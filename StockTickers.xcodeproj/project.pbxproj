@@ -26,6 +26,8 @@
 		C9FDABDF27C3A45000B073AE /* StockCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDABDD27C3A45000B073AE /* StockCellViewModel.swift */; };
 		C9FDABE027C3A45000B073AE /* StockCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDABDE27C3A45000B073AE /* StockCollectionCell.swift */; };
 		C9FDABE327C3A70500B073AE /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDABE227C3A70500B073AE /* ActivityIndicatorView.swift */; };
+		C9FDABE727C3B7DC00B073AE /* NewsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDABE627C3B7DC00B073AE /* NewsCollectionCell.swift */; };
+		C9FDABE927C3B7FC00B073AE /* NewsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDABE827C3B7FC00B073AE /* NewsCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		C9FDABDD27C3A45000B073AE /* StockCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockCellViewModel.swift; sourceTree = "<group>"; };
 		C9FDABDE27C3A45000B073AE /* StockCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockCollectionCell.swift; sourceTree = "<group>"; };
 		C9FDABE227C3A70500B073AE /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		C9FDABE627C3B7DC00B073AE /* NewsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionCell.swift; sourceTree = "<group>"; };
+		C9FDABE827C3B7FC00B073AE /* NewsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +197,8 @@
 			children = (
 				C9FDABDD27C3A45000B073AE /* StockCellViewModel.swift */,
 				C9FDABDE27C3A45000B073AE /* StockCollectionCell.swift */,
+				C9FDABE627C3B7DC00B073AE /* NewsCollectionCell.swift */,
+				C9FDABE827C3B7FC00B073AE /* NewsCellViewModel.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -348,6 +354,8 @@
 				C9FDAB9C27C38E4A00B073AE /* SceneDelegate.swift in Sources */,
 				C9FDABE027C3A45000B073AE /* StockCollectionCell.swift in Sources */,
 				C9FDABE327C3A70500B073AE /* ActivityIndicatorView.swift in Sources */,
+				C9FDABE727C3B7DC00B073AE /* NewsCollectionCell.swift in Sources */,
+				C9FDABE927C3B7FC00B073AE /* NewsCellViewModel.swift in Sources */,
 				C9FDABD427C3981700B073AE /* NewsFeedService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

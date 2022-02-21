@@ -9,18 +9,18 @@ import Foundation
 import Combine
 
 protocol NewsFeedServiceProtocol {
-    func getNewsFeed() -> AnyPublisher<[News], Error>
+    func getNewsFeed() -> AnyPublisher<[Article], Error>
 }
 
 final class NewsFeedService: NewsFeedServiceProtocol {
-    func getNewsFeed() -> AnyPublisher<[News], Error> {
+    func getNewsFeed() -> AnyPublisher<[Article], Error> {
         var dataTask: URLSessionDataTask?
         
         let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
         let onCancel: () -> Void = { dataTask?.cancel() }
         
         // promise type is Result<[Player], Error>
-        return Future<[News], Error> { [weak self] promise in
+        return Future<[Article], Error> { [weak self] promise in
             guard let urlRequest = self?.getUrlRequest() else {
                 promise(.failure(ServiceError.urlRequest))
                 return
@@ -34,8 +34,8 @@ final class NewsFeedService: NewsFeedServiceProtocol {
                     return
                 }
                 do {
-                    let news = try JSONDecoder().decode([News].self, from: data)
-                    promise(.success(news))
+                    let news = try JSONDecoder().decode(News.self, from: data)
+                    promise(.success(news.articles))
                 } catch {
                     promise(.failure(ServiceError.decode))
                 }

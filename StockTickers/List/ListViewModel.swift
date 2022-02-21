@@ -20,21 +20,50 @@ enum ListViewModelState: Equatable {
 }
 
 final class ListViewModel {
-    enum Section { case stocksFetch, newsFeedFetch }
+    enum Section: String, CaseIterable, Hashable { case stocksFetch, newsFeedFetch }
 
     @Published private(set) var stocks: [Stock] = []
+    @Published private(set) var articles: [Article] = []
+
     @Published private(set) var state: ListViewModelState = .loading
     
     private let stocksService: StocksServiceProtocol
+    private let newsFeedService: NewsFeedServiceProtocol
+    
     private var bindings = Set<AnyCancellable>()
     
-    init(stocksService: StocksServiceProtocol = StocksService()) {
+    init(stocksService: StocksServiceProtocol = StocksService(),
+         newsFeedService: NewsFeedServiceProtocol = NewsFeedService()) {
         self.stocksService = stocksService
+        self.newsFeedService = newsFeedService
     }
 
 }
 
 extension ListViewModel {
+    
+    func fetchNewsFeed() {
+        state = .loading
+        
+        let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
+            switch completion {
+            case .failure:
+                self?.state = .error(.stocksFetch)
+            case .finished:
+                self?.state = .finishedLoading
+            }
+        }
+        
+        let valueHandler: ([Article]) -> Void = { [weak self] articles in
+            self?.articles = articles
+        }
+        
+        newsFeedService
+            .getNewsFeed()
+            .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
+            .store(in: &bindings)
+    }
+    
     func fetchStocks() {
         state = .loading
         
