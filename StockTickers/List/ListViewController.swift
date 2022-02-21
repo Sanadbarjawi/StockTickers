@@ -15,6 +15,7 @@ final class ListViewController: UIViewController {
     private var bindings = Set<AnyCancellable>()
     
     private lazy var dataSource: UICollectionViewDiffableDataSource<ListViewModel.Section, AnyHashable> = makeDataSource()
+    private var snapshot: NSDiffableDataSourceSnapshot<ListViewModel.Section, AnyHashable>!
     
     init(viewModel: ListViewModel = ListViewModel()) {
         self.viewModel = viewModel
@@ -55,6 +56,9 @@ final class ListViewController: UIViewController {
         let newsCell = UINib(nibName: NewsCollectionViewCell.identifier, bundle: nil)
         contentView.collectionView.register(newsCell,
                                             forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
+        snapshot = NSDiffableDataSourceSnapshot<ListViewModel.Section, AnyHashable>()
+        snapshot.appendSections([ListViewModel.Section.stocksFetch, ListViewModel.Section.newsFeedFetch])
+
         
     }
     
@@ -140,13 +144,10 @@ extension ListViewController {
     ///   - stocks: stocks if any
     private func updateStocksSections(stocks: [Stock]) {
         
-        var snapshot = NSDiffableDataSourceSnapshot<ListViewModel.Section, AnyHashable>()
         defer {
             dataSource.apply(snapshot, animatingDifferences: true)
         }
         
-        // We have either apples or oranges, so update the snapshot with those
-        snapshot.appendSections([ListViewModel.Section.stocksFetch, ListViewModel.Section.newsFeedFetch])
         snapshot.appendItems(stocks, toSection: ListViewModel.Section.stocksFetch)
     }
     
@@ -155,13 +156,10 @@ extension ListViewController {
     ///   - news: news if any
     private func updateNewsSection(articles: [Article]) {
         
-        var snapshot = NSDiffableDataSourceSnapshot<ListViewModel.Section, AnyHashable>()
         defer {
             dataSource.apply(snapshot, animatingDifferences: true)
         }
         
-        // We have either apples or oranges, so update the snapshot with those
-        snapshot.appendSections([ListViewModel.Section.stocksFetch, ListViewModel.Section.newsFeedFetch])
         snapshot.appendItems(articles, toSection: ListViewModel.Section.newsFeedFetch)
     }
     

@@ -64,51 +64,52 @@ class ListView: UIView {
     }
     
     private func setUpViews() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .blue
     }
     
     func createLayout() -> UICollectionViewLayout {
-//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-//                                              heightDimension: .fractionalHeight(1.0))
-//        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//
-//        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-//                                               heightDimension: .absolute(44))
-//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-//                                                       subitems: [item])
-//
-//        let section = NSCollectionLayoutSection(group: group)
-//
-//        let layout = UICollectionViewCompositionalLayout(section: section)
-//        return layout
-//
-        let size = NSCollectionLayoutSize(
-            widthDimension: NSCollectionLayoutDimension.fractionalWidth(1.0),
-            heightDimension: NSCollectionLayoutDimension.estimated(30)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: size)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitems: [item])
         
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        section.interGroupSpacing = 10
-        
-//        let headerHeight:CGFloat = 260//view.frame.height * 0.34
-//        let headerFooterSize = NSCollectionLayoutSize(
-//            widthDimension: .fractionalWidth(1.0),
-//            heightDimension: .absolute(headerHeight)
-//        )
-        
-//        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-//            layoutSize: headerFooterSize,
-//            elementKind: UICollectionView.elementKindSectionHeader,
-//            alignment: .top
-//        )
-//        sectionHeader.extendsBoundary = true
-        section.orthogonalScrollingBehavior = .none
-//        section.boundarySupplementaryItems = [sectionHeader]
-        
-        return UICollectionViewCompositionalLayout(section: section)
+        return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
+                        guard let section = ListViewModel.Section(rawValue: sectionNumber) else { return nil }
+            switch section {
+            case .stocksFetch:
+                
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+                item.contentInsets.trailing = 2
+//                item.contentInsets.bottom = 16
+                
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(200)), subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                
+                section.orthogonalScrollingBehavior = .paging
+                
+                return section
+                
+                
+            case .newsFeedFetch:
+                
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.25), heightDimension: .absolute(150)))
+                item.contentInsets.trailing = 16
+                item.contentInsets.bottom = 16
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(500)), subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets.leading = 16
+                
+//                section.boundarySupplementaryItems = [
+//                    .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: categoryHeaderId, alignment: .topLeading)
+//                ]
+                
+                return section
+            default:
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(300)))
+                item.contentInsets.bottom = 16
+                item.contentInsets.trailing = 16
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1000)), subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(top: 32, leading: 16, bottom: 0, trailing: 0)
+                return section
+                
+            }
+        }
     }
 }

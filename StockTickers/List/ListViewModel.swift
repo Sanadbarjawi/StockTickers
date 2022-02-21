@@ -20,7 +20,7 @@ enum ListViewModelState: Equatable {
 }
 
 final class ListViewModel {
-    enum Section: String, CaseIterable, Hashable { case stocksFetch, newsFeedFetch }
+    enum Section: Int, CaseIterable, Hashable { case stocksFetch, newsFeedFetch }
 
     @Published private(set) var stocks: [Stock] = []
     @Published private(set) var articles: [Article] = []

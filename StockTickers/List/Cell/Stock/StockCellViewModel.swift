@@ -22,6 +22,6 @@ final class StockCellViewModel {
     
     private func setUpBindings() {
         stockName = stock.title
-        price = stock.value
+        price = stock.value.toUSD() ?? "-"
     }
 }

@@ -20,6 +20,8 @@ protocol StocksServiceProtocol {
 }
 
 final class StocksService: StocksServiceProtocol {
+    var importer: CSVImporter<Stock>?
+    
     func getStockTickers() -> AnyPublisher<[Stock], Error> {
         var dataTask: URLSessionDataTask?
         
@@ -33,7 +35,7 @@ final class StocksService: StocksServiceProtocol {
                 return
             }
             
-            dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
+            dataTask = URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, _, error) in
                 guard let data = data else {
                     if let error = error {
                         promise(.failure(error))
@@ -41,8 +43,8 @@ final class StocksService: StocksServiceProtocol {
                     return
                 }
                 if let stocksString = String(data: data, encoding: .utf8) {
-                    let importer = CSVImporter<Stock>(contentString: stocksString)
-                    importer.startImportingRecords { recordValues -> Stock in
+                    self?.importer = CSVImporter<Stock>(contentString: stocksString)
+                    self?.importer?.startImportingRecords { recordValues -> Stock in
                         
                         return Stock(title: recordValues[0], value: recordValues[1])
                         
