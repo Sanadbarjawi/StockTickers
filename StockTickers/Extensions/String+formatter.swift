@@ -8,17 +8,21 @@
 import Foundation
 
 extension String {
-    
-    func toUSD() -> String? {
+
+    func toUSD2() -> String? {//#.## USD.
         let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "en_US")
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
         let stringPrice = self.replacingOccurrences(of: " ", with: "")
         if let priceInteger = Double(stringPrice) {
             let priceNumber = NSNumber(value: priceInteger)
-            return formatter.string(from: priceNumber)
+            let formatted = formatter.string(from: priceNumber)
+            return String.init(format: "%@ %@", formatted ?? "-", "USD")
         } else {
             return nil
         }
     }
+   
 }

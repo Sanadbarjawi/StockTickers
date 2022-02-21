@@ -75,40 +75,38 @@ class ListView: UIView {
             case .stocksFetch:
                 
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-                item.contentInsets.trailing = 2
-//                item.contentInsets.bottom = 16
-                
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(200)), subitems: [item])
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
+
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(70)), subitems: [item])
+                group.interItemSpacing = .fixed(8)
+
                 let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets.leading = 12
+                section.contentInsets.bottom = 12
+                section.contentInsets.trailing = 12
+                section.contentInsets.top = 12
                 
-                section.orthogonalScrollingBehavior = .paging
-                
+                section.orthogonalScrollingBehavior = .groupPagingCentered
+
                 return section
                 
                 
             case .newsFeedFetch:
                 
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.25), heightDimension: .absolute(150)))
-                item.contentInsets.trailing = 16
-                item.contentInsets.bottom = 16
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50)))
+                item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 8, bottom: 20, trailing: 8)
+                
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(500)), subitems: [item])
+                group.interItemSpacing = .fixed(8)
+                
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.leading = 16
-                
-//                section.boundarySupplementaryItems = [
-//                    .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: categoryHeaderId, alignment: .topLeading)
-//                ]
-                
+                section.contentInsets.leading = 12
+                section.contentInsets.trailing = 12
+                section.contentInsets.bottom = 12
+                section.contentInsets.top = 12
+                section.interGroupSpacing = 15
+
                 return section
-            default:
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(300)))
-                item.contentInsets.bottom = 16
-                item.contentInsets.trailing = 16
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1000)), subitems: [item])
-                let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = .init(top: 32, leading: 16, bottom: 0, trailing: 0)
-                return section
-                
             }
         }
     }
