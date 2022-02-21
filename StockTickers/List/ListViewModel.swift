@@ -20,11 +20,12 @@ enum ListViewModelState: Equatable {
 }
 
 final class ListViewModel {
-    enum Section: Int, CaseIterable, Hashable { case stocksFetch, newsFeedFetch }
+    enum Section: Int, CaseIterable, Hashable { case stocks, top6News, remainingNewsFeed }
 
     @Published private(set) var stocks: [Stock] = []
     @Published private(set) var articles: [Article] = []
-
+    @Published private(set) var top6Articles: [Article] = []
+    
     @Published private(set) var state: ListViewModelState = .loading
     
     private let stocksService: StocksServiceProtocol
@@ -55,7 +56,8 @@ extension ListViewModel {
         }
         
         let valueHandler: ([Article]) -> Void = { [weak self] articles in
-            self?.articles = articles
+            self?.top6Articles = Array(articles.prefix(6))
+            self?.articles = Array(articles.suffix(from: 6))
         }
         
         newsFeedService

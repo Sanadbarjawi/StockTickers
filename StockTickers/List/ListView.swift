@@ -72,7 +72,7 @@ class ListView: UIView {
         return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
                         guard let section = ListViewModel.Section(rawValue: sectionNumber) else { return nil }
             switch section {
-            case .stocksFetch:
+            case .stocks:
                 
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
@@ -90,12 +90,27 @@ class ListView: UIView {
 
                 return section
                 
+            case .top6News:
                 
-            case .newsFeedFetch:
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
+
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), subitems: [item])
+                group.interItemSpacing = .fixed(8)
+
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets.leading = 12
+                section.contentInsets.bottom = 12
+                section.contentInsets.trailing = 12
+                section.contentInsets.top = 12
                 
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50)))
-                item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 8, bottom: 20, trailing: 8)
+                section.orthogonalScrollingBehavior = .groupPagingCentered
+
+                return section
                 
+            case .remainingNewsFeed:
+                
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50)))                
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(500)), subitems: [item])
                 group.interItemSpacing = .fixed(8)
                 
@@ -107,6 +122,7 @@ class ListView: UIView {
                 section.interGroupSpacing = 15
 
                 return section
+                
             }
         }
     }

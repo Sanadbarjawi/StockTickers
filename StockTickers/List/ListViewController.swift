@@ -40,12 +40,13 @@ final class ListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        Timer.publish(every: 1, tolerance: .none, on: RunLoop.main, in: RunLoop.Mode.common, options: nil)
-            .autoconnect()
-            .sink(receiveCompletion: {_ in}) { [weak self] _ in self?.viewModel.fetchStocks() }
-            .store(in: &bindings)
-        
+//
+//        Timer.publish(every: 1, tolerance: .none, on: RunLoop.main, in: RunLoop.Mode.common, options: nil)
+//            .autoconnect()
+//            .sink(receiveCompletion: {_ in}) { [weak self] _ in self?.viewModel.fetchStocks() }
+//            .store(in: &bindings)
+//
+        viewModel.fetchStocks()
         viewModel.fetchNewsFeed()
     }
     
@@ -57,7 +58,9 @@ final class ListViewController: UIViewController {
         contentView.collectionView.register(newsCell,
                                             forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
         snapshot = NSDiffableDataSourceSnapshot<ListViewModel.Section, AnyHashable>()
-        snapshot.appendSections([ListViewModel.Section.stocksFetch, ListViewModel.Section.newsFeedFetch])
+        snapshot.appendSections([ListViewModel.Section.stocks,
+                                 ListViewModel.Section.top6News,
+                                 ListViewModel.Section.remainingNewsFeed])
 
         
     }
@@ -69,6 +72,13 @@ final class ListViewController: UIViewController {
                 .receive(on: RunLoop.main)
                 .sink(receiveValue: { [weak self] stocks in
                     self?.updateStocksSections(stocks: stocks)
+                })
+                .store(in: &bindings)
+            
+            viewModel.$top6Articles
+                .receive(on: RunLoop.main)
+                .sink(receiveValue: { [weak self] top6 in
+                    self?.updateTop6NewsSection(articles: top6)
                 })
                 .store(in: &bindings)
             
@@ -148,7 +158,7 @@ extension ListViewController {
             dataSource.apply(snapshot, animatingDifferences: true)
         }
         
-        snapshot.appendItems(stocks, toSection: ListViewModel.Section.stocksFetch)
+        snapshot.appendItems(stocks, toSection: ListViewModel.Section.stocks)
     }
     
     /// Update the data source snapshot
@@ -160,7 +170,19 @@ extension ListViewController {
             dataSource.apply(snapshot, animatingDifferences: true)
         }
         
-        snapshot.appendItems(articles, toSection: ListViewModel.Section.newsFeedFetch)
+        snapshot.appendItems(articles, toSection: ListViewModel.Section.remainingNewsFeed)
+    }
+    
+    /// Update the data source snapshot
+    /// - Parameters:
+    ///   - news: updateTop6NewsSection
+    private func updateTop6NewsSection(articles: [Article]) {
+        
+        defer {
+            dataSource.apply(snapshot, animatingDifferences: true)
+        }
+        
+        snapshot.appendItems(articles, toSection: ListViewModel.Section.top6News)
     }
     
 }
