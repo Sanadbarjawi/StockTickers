@@ -64,7 +64,7 @@ class ListView: UIView {
     }
     
     private func setUpViews() {
-        collectionView.backgroundColor = .blue
+        collectionView.backgroundColor = UIColor.systemGray5
     }
     
     func createLayout() -> UICollectionViewLayout {
@@ -74,10 +74,10 @@ class ListView: UIView {
             switch section {
             case .stocks:
                 
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.90), heightDimension: .fractionalHeight(1)))
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .estimated(1), heightDimension: .fractionalHeight(1)))
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
 
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.90), heightDimension: .absolute(30)), subitems: [item])
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .estimated(1), heightDimension: .absolute(30)), subitems: [item])
                 group.interItemSpacing = .fixed(8)
 
                 let section = NSCollectionLayoutSection(group: group)

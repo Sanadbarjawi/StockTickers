@@ -12,7 +12,6 @@
 		36BE7D68AC27C090A1646BB7 /* Pods_StockTickers_StockTickersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFAFFBFFEA63AD8B765D89F /* Pods_StockTickers_StockTickersUITests.framework */; };
 		C9FDAB9A27C38E4A00B073AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDAB9927C38E4A00B073AE /* AppDelegate.swift */; };
 		C9FDAB9C27C38E4A00B073AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDAB9B27C38E4A00B073AE /* SceneDelegate.swift */; };
-		C9FDAB9E27C38E4A00B073AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDAB9D27C38E4A00B073AE /* ViewController.swift */; };
 		C9FDABA127C38E4A00B073AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9FDAB9F27C38E4A00B073AE /* Main.storyboard */; };
 		C9FDABA327C38E4B00B073AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9FDABA227C38E4B00B073AE /* Assets.xcassets */; };
 		C9FDABA627C38E4B00B073AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9FDABA427C38E4B00B073AE /* LaunchScreen.storyboard */; };
@@ -34,6 +33,7 @@
 		C9FDABF427C3C72400B073AE /* NewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDABF227C3C72400B073AE /* NewsCollectionViewCell.swift */; };
 		C9FDABF527C3C72400B073AE /* NewsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FDABF327C3C72400B073AE /* NewsCollectionViewCell.xib */; };
 		C9FDABFB27C3EC2800B073AE /* String+formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDABFA27C3EC2800B073AE /* String+formatter.swift */; };
+		C9FDABFE27C4079600B073AE /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FDABFD27C4079600B073AE /* UIColor+hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,6 @@
 		C9FDAB9627C38E4A00B073AE /* StockTickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockTickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9FDAB9927C38E4A00B073AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9FDAB9B27C38E4A00B073AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C9FDAB9D27C38E4A00B073AE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C9FDABA027C38E4A00B073AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C9FDABA227C38E4B00B073AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9FDABA527C38E4B00B073AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		C9FDABF227C3C72400B073AE /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		C9FDABF327C3C72400B073AE /* NewsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCollectionViewCell.xib; sourceTree = "<group>"; };
 		C9FDABFA27C3EC2800B073AE /* String+formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+formatter.swift"; sourceTree = "<group>"; };
+		C9FDABFD27C4079600B073AE /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		CFF0D0667791E198576334EE /* Pods-StockTickers-StockTickersUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockTickers-StockTickersUITests.release.xcconfig"; path = "Target Support Files/Pods-StockTickers-StockTickersUITests/Pods-StockTickers-StockTickersUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DFFAFFBFFEA63AD8B765D89F /* Pods_StockTickers_StockTickersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockTickers_StockTickersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56FDAF33244ABDB1AC553E5 /* Pods-StockTickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockTickers.release.xcconfig"; path = "Target Support Files/Pods-StockTickers/Pods-StockTickers.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,7 +175,6 @@
 				C9FDABC927C393C800B073AE /* API */,
 				C9FDAB9927C38E4A00B073AE /* AppDelegate.swift */,
 				C9FDAB9B27C38E4A00B073AE /* SceneDelegate.swift */,
-				C9FDAB9D27C38E4A00B073AE /* ViewController.swift */,
 				C9FDAB9F27C38E4A00B073AE /* Main.storyboard */,
 				C9FDABA227C38E4B00B073AE /* Assets.xcassets */,
 				C9FDABA427C38E4B00B073AE /* LaunchScreen.storyboard */,
@@ -260,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				C9FDABFA27C3EC2800B073AE /* String+formatter.swift */,
+				C9FDABFD27C4079600B073AE /* UIColor+hex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -530,11 +530,11 @@
 				C9FDABD727C39F5100B073AE /* ListView.swift in Sources */,
 				C9FDABD227C3978500B073AE /* News.swift in Sources */,
 				C9FDABF427C3C72400B073AE /* NewsCollectionViewCell.swift in Sources */,
-				C9FDAB9E27C38E4A00B073AE /* ViewController.swift in Sources */,
 				C9FDAB9A27C38E4A00B073AE /* AppDelegate.swift in Sources */,
 				C9FDABFB27C3EC2800B073AE /* String+formatter.swift in Sources */,
 				C9FDABCD27C3941400B073AE /* StocksService.swift in Sources */,
 				C9FDABD927C3A07500B073AE /* ListViewController.swift in Sources */,
+				C9FDABFE27C4079600B073AE /* UIColor+hex.swift in Sources */,
 				C9FDABCF27C3949B00B073AE /* Stock.swift in Sources */,
 				C9FDAB9C27C38E4A00B073AE /* SceneDelegate.swift in Sources */,
 				C9FDABE327C3A70500B073AE /* ActivityIndicatorView.swift in Sources */,

@@ -32,8 +32,7 @@ final class ListViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        view.backgroundColor = .darkGray
-        
+        title = "Stock Tickers"
         setUpCollectionView()
         setUpBindings()
     }
