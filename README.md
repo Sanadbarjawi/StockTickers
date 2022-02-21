@@ -3,16 +3,13 @@
 a iOS application that can display a stocks
 
 ## Features
-
-* Stocks get refreshed every 1 second
-* A verified checkbox if the fact is legit! ✅
-* A "new" icon displayed if the fact has been created in the last 90 days 🙌🏼
-* A simple search box that allows user to find a fact by typing in a specific keyword 🔍
-* Pull-to-refresh functionality to refresh the results list 🌪
+ 
+* Stocks get refreshed every 1 second 🌪
 
 ## Project Technicals
 
 - [x] MVVM Archeticture.
+- [x] Combine
 - [x] Unit Testing 🧪
 
 ## Getting Started
