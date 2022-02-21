@@ -11,8 +11,11 @@ import UIKit
 
 final class NewsCellViewModel {
     @Published var title: String = ""
-    @Published var image: UIImage?
-        
+    @Published var description: String = ""
+    @Published var date: String = ""
+    @Published var imageURL: String?
+    @Published var isTop6: Bool = false
+
     private let article: Article
     init(article: Article) {
         self.article = article
@@ -22,6 +25,9 @@ final class NewsCellViewModel {
     
     private func setUpBindings() {
         title = article.title
-//        image = article.urlToImage
+        description = article.content
+        date = article.publishedAt
+        isTop6 = article.isTop6
+        imageURL = article.urlToImage
     }
 }

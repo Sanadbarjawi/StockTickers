@@ -7,11 +7,15 @@
 
 import UIKit
 import Combine
+import Kingfisher
 
 final class NewsCollectionViewCell: UICollectionViewCell {
     static let identifier = "NewsCollectionViewCell"
    
-    @IBOutlet weak var articleTitle: UILabel!
+    @IBOutlet weak var articleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+
     @IBOutlet weak var articleImageView: UIImageView!
     
     var viewModel: NewsCellViewModel! {
@@ -19,7 +23,15 @@ final class NewsCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUpViewModel() {
-        articleTitle.text = viewModel.title
-        articleImageView.image = viewModel.image
+        articleLabel.text = viewModel.title
+        if let url = URL(string: viewModel.imageURL ?? "-") {
+            articleImageView.kf.setImage(with: url)
+        }
+        
+        dateLabel.isHidden = viewModel.isTop6
+        descriptionLabel.isHidden = viewModel.isTop6
+        
+        dateLabel.text = viewModel.date
+        descriptionLabel.text = viewModel.description
     }
 }

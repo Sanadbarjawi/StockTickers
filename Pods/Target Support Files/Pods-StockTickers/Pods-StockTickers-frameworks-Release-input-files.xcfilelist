@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-StockTickers/Pods-StockTickers-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/CSVImporter/CSVImporter.framework
 ${BUILT_PRODUCTS_DIR}/HandySwift/HandySwift.framework
+${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework

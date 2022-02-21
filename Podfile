@@ -8,7 +8,8 @@ target 'StockTickers' do
   # Pods for StockTickers
 
 	pod 'CSVImporter'
-
+  pod 'Kingfisher'
+  
   target 'StockTickersTests' do
     inherit! :search_paths
     # Pods for testing

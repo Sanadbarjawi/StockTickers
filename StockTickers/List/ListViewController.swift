@@ -132,7 +132,7 @@ final class ListViewController: UIViewController {
                 return cell
                 
             } else if let article = item as? Article {
-                //stock
+                //article
                guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: NewsCollectionViewCell.identifier,
                     for: indexPath) as? NewsCollectionViewCell else {return UICollectionViewCell()}

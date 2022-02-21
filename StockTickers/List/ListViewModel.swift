@@ -57,6 +57,12 @@ extension ListViewModel {
         
         let valueHandler: ([Article]) -> Void = { [weak self] articles in
             self?.top6Articles = Array(articles.prefix(6))
+                .compactMap { article -> Article in
+                    var mutatedArticle: Article = article
+                    mutatedArticle.isTop6 = true
+                    return mutatedArticle
+                }
+            
             self?.articles = Array(articles.suffix(from: 6))
         }
         

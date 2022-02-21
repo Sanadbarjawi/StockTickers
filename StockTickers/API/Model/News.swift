@@ -25,6 +25,8 @@ struct Article: Equatable, Hashable, Codable {
     let urlToImage: String
     let publishedAt: String
     let content: String
+    
+    var isTop6: Bool = false
 }
 
 extension Article {

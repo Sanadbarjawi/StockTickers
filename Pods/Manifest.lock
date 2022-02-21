@@ -2,19 +2,23 @@ PODS:
   - CSVImporter (1.9.1):
     - HandySwift (~> 2.5)
   - HandySwift (2.8.0)
+  - Kingfisher (7.1.2)
 
 DEPENDENCIES:
   - CSVImporter
+  - Kingfisher
 
 SPEC REPOS:
   trunk:
     - CSVImporter
     - HandySwift
+    - Kingfisher
 
 SPEC CHECKSUMS:
   CSVImporter: 1543192354ecf8abccd2cc77947d190fd9cf2b18
   HandySwift: 0a32500215166a56a58f972f7ce1641361307e8b
+  Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
 
-PODFILE CHECKSUM: 4e87d754ce58bc2bfe3cb25cb570f68d3678b5fa
+PODFILE CHECKSUM: 6d73629036056e1b1344eaab102a0a37c09e1104
 
 COCOAPODS: 1.11.2
