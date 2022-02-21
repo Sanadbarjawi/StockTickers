@@ -153,7 +153,7 @@ extension ListViewController {
     private func updateStocksSections(stocks: [Stock]) {
         
         defer {
-            dataSource.apply(snapshot, animatingDifferences: true)
+            dataSource.apply(snapshot, animatingDifferences: false)
         }
         
         snapshot.appendItems(stocks, toSection: ListViewModel.Section.stocks)
@@ -165,7 +165,7 @@ extension ListViewController {
     private func updateNewsSection(articles: [Article]) {
         
         defer {
-            dataSource.apply(snapshot, animatingDifferences: true)
+            dataSource.apply(snapshot, animatingDifferences: false)
         }
         
         snapshot.appendItems(articles, toSection: ListViewModel.Section.remainingNewsFeed)
@@ -177,7 +177,7 @@ extension ListViewController {
     private func updateTop6NewsSection(articles: [Article]) {
         
         defer {
-            dataSource.apply(snapshot, animatingDifferences: true)
+            dataSource.apply(snapshot, animatingDifferences: false)
         }
         
         snapshot.appendItems(articles, toSection: ListViewModel.Section.top6News)

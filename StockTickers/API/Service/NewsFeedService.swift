@@ -19,7 +19,6 @@ final class NewsFeedService: NewsFeedServiceProtocol {
         let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
         let onCancel: () -> Void = { dataTask?.cancel() }
         
-        // promise type is Result<[Player], Error>
         return Future<[Article], Error> { [weak self] promise in
             guard let urlRequest = self?.getUrlRequest() else {
                 promise(.failure(ServiceError.urlRequest))

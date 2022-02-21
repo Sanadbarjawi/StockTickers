@@ -75,7 +75,7 @@ class ListView: UIView {
             case .stocks:
                 
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .estimated(1), heightDimension: .fractionalHeight(1)))
-                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
+//                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
 
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .estimated(1), heightDimension: .absolute(30)), subitems: [item])
                 group.interItemSpacing = .fixed(8)

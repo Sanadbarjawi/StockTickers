@@ -17,7 +17,9 @@ struct News: Codable {
 
 // MARK: - Article
 struct Article: Equatable, Hashable, Codable {
- 
+    
+    let identifier = UUID()
+
     let source: Source
     let author: String?
     let title, articleDescription: String
@@ -37,25 +39,32 @@ extension Article {
     }
     
     static func == (lhs: Article, rhs: Article) -> Bool {
-        return lhs.title == rhs.title &&
-        lhs.source == rhs.source &&
-        lhs.author == rhs.author &&
-        lhs.articleDescription == rhs.articleDescription &&
-        lhs.url == rhs.url &&
-        lhs.urlToImage == rhs.urlToImage &&
-        lhs.publishedAt == rhs.publishedAt &&
-        lhs.content == rhs.content
+        return lhs.identifier == rhs.identifier
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+        hasher.combine(content)
+        hasher.combine(title)
     }
 }
 
 // MARK: - Source
 struct Source: Codable, Equatable, Hashable {
+    let identifier = UUID()
+
     let id: String
     let name: String
 }
 extension Source {
+    
     static func == (lhs: Source, rhs: Source) -> Bool {
-        return lhs.id == rhs.id &&
-        lhs.name == rhs.name 
+        return lhs.identifier == rhs.identifier
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+        hasher.combine(id)
+        hasher.combine(name)
     }
 }
