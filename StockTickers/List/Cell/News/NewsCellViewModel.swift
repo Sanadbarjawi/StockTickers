@@ -24,9 +24,9 @@ final class NewsCellViewModel {
     }
     
     private func setUpBindings() {
-        title = article.title
-        description = article.content
-        date = article.publishedAt
+        title = article.title ?? ""
+        description = article.content ?? ""
+        date = article.publishedAt ?? ""
         isTop6 = article.isTop6
         imageURL = article.urlToImage
     }

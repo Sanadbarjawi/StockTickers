@@ -20,13 +20,13 @@ struct Article: Equatable, Hashable, Codable {
     
     let identifier = UUID()
 
-    let source: Source
+    let source: Source?
     let author: String?
-    let title, articleDescription: String
-    let url: String
-    let urlToImage: String
-    let publishedAt: String
-    let content: String
+    let title, articleDescription: String?
+    let url: String?
+    let urlToImage: String?
+    let publishedAt: String?
+    let content: String?
     
     var isTop6: Bool = false
 }
