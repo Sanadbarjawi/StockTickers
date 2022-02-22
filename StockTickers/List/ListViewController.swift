@@ -15,8 +15,7 @@ final class ListViewController: UIViewController {
     private var bindings = Set<AnyCancellable>()
     
     private lazy var dataSource: UICollectionViewDiffableDataSource<ListViewModel.Section, AnyHashable> = makeDataSource()
-    private var snapshot: NSDiffableDataSourceSnapshot<ListViewModel.Section, AnyHashable>!
-    
+
     init(viewModel: ListViewModel = ListViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -55,12 +54,6 @@ final class ListViewController: UIViewController {
         let newsCell = UINib(nibName: NewsCollectionViewCell.identifier, bundle: nil)
         contentView.collectionView.register(newsCell,
                                             forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
-        snapshot = NSDiffableDataSourceSnapshot<ListViewModel.Section, AnyHashable>()
-        snapshot.appendSections([ListViewModel.Section.stocks,
-                                 ListViewModel.Section.top6News,
-                                 ListViewModel.Section.remainingNewsFeed])
-
-        
     }
     
     private func setUpBindings() {
@@ -68,22 +61,22 @@ final class ListViewController: UIViewController {
         func bindViewModelToView() {
             viewModel.$stocks
                 .receive(on: RunLoop.main)
-                .sink(receiveValue: { [weak self] stocks in
-                    self?.updateStocksSections(stocks: stocks)
+                .sink(receiveValue: { [weak self] _ in
+                    self?.reloadDataSource()
                 })
                 .store(in: &bindings)
             
             viewModel.$top6Articles
                 .receive(on: RunLoop.main)
-                .sink(receiveValue: { [weak self] top6 in
-                    self?.updateTop6NewsSection(articles: top6)
+                .sink(receiveValue: { [weak self] _ in
+                    self?.reloadDataSource()
                 })
                 .store(in: &bindings)
             
             viewModel.$articles
                 .receive(on: RunLoop.main)
-                .sink(receiveValue: { [weak self] articles in
-                    self?.updateNewsSection(articles: articles)
+                .sink(receiveValue: { [weak self] _ in
+                    self?.reloadDataSource()
                 })
                 .store(in: &bindings)
             
@@ -105,7 +98,6 @@ final class ListViewController: UIViewController {
                 .sink(receiveValue: stateValueHandler)
                 .store(in: &bindings)
         }
-        
         bindViewModelToView()
     }
     
@@ -146,41 +138,18 @@ final class ListViewController: UIViewController {
 }
 
 extension ListViewController {
-    
-    /// Update the data source snapshot
-    /// - Parameters:
-    ///   - stocks: stocks if any
-    private func updateStocksSections(stocks: [Stock]) {
+ 
+    func reloadDataSource() {
+        var snapShot = NSDiffableDataSourceSnapshot<ListViewModel.Section, AnyHashable>()
+        snapShot.appendSections([ListViewModel.Section.stocks,
+                                 ListViewModel.Section.top6News,
+                                 ListViewModel.Section.remainingNewsFeed])
         
-        defer {
-            dataSource.apply(snapshot, animatingDifferences: false)
-        }
+        snapShot.appendItems(viewModel.stocks, toSection: ListViewModel.Section.stocks)
+        snapShot.appendItems(viewModel.top6Articles, toSection: ListViewModel.Section.top6News)
+        snapShot.appendItems(viewModel.articles, toSection: ListViewModel.Section.remainingNewsFeed)
         
-        snapshot.appendItems(stocks, toSection: ListViewModel.Section.stocks)
-    }
-    
-    /// Update the data source snapshot
-    /// - Parameters:
-    ///   - news: news if any
-    private func updateNewsSection(articles: [Article]) {
-        
-        defer {
-            dataSource.apply(snapshot, animatingDifferences: false)
-        }
-        
-        snapshot.appendItems(articles, toSection: ListViewModel.Section.remainingNewsFeed)
-    }
-    
-    /// Update the data source snapshot
-    /// - Parameters:
-    ///   - news: updateTop6NewsSection
-    private func updateTop6NewsSection(articles: [Article]) {
-        
-        defer {
-            dataSource.apply(snapshot, animatingDifferences: false)
-        }
-        
-        snapshot.appendItems(articles, toSection: ListViewModel.Section.top6News)
+        dataSource.apply(snapShot, animatingDifferences: true)
     }
     
 }

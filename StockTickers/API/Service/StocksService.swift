@@ -21,7 +21,7 @@ protocol StocksServiceProtocol {
 
 final class StocksService: StocksServiceProtocol {
     var importer: CSVImporter<Stock>?
-    
+    var backgroundQueue = DispatchQueue(label: "", qos: .background)
     func getStockTickers() -> AnyPublisher<[Stock], Error> {
         var dataTask: URLSessionDataTask?
         
@@ -42,7 +42,7 @@ final class StocksService: StocksServiceProtocol {
                     return
                 }
                 if let stocksString = String(data: data, encoding: .utf8) {
-                    self?.importer = CSVImporter<Stock>(contentString: stocksString)
+                    self?.importer = CSVImporter<Stock>(contentString: stocksString, workQosClass: .background, callbacksQosClass: .background)
                     self?.importer?.startImportingRecords { recordValues -> Stock in
                         
                         return Stock(title: recordValues[0], value: recordValues[1])
@@ -58,7 +58,7 @@ final class StocksService: StocksServiceProtocol {
             }
         }
         .handleEvents(receiveSubscription: onSubscription, receiveCancel: onCancel)
-        .receive(on: DispatchQueue.main)
+        .receive(on: backgroundQueue)
         .eraseToAnyPublisher()
         
     }
