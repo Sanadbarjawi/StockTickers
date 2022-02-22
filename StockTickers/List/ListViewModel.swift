@@ -62,8 +62,9 @@ extension ListViewModel {
                     mutatedArticle.isTop6 = true
                     return mutatedArticle
                 }
-            
-            self?.articles = Array(articles.suffix(from: 6))
+            if articles.count > 6 {
+                self?.articles = Array(articles.suffix(from: 6))
+            }
         }
         
         newsFeedService
@@ -76,7 +77,7 @@ extension ListViewModel {
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
             case .failure: self?.state = .error(.stocksFetch)
-            case .finished: break
+            case .finished: self?.state = .finishedLoading
             }
         }
         

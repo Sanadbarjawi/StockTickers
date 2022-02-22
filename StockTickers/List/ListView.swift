@@ -85,7 +85,7 @@ class ListView: UIView {
                 section.contentInsets.trailing = 0
                 section.contentInsets.top = 12
                 
-                section.orthogonalScrollingBehavior = .groupPaging
+                section.orthogonalScrollingBehavior = .continuous
 
                 return section
                 
