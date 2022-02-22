@@ -149,7 +149,7 @@ extension ListViewController {
         snapShot.appendItems(viewModel.top6Articles, toSection: ListViewModel.Section.top6News)
         snapShot.appendItems(viewModel.articles, toSection: ListViewModel.Section.remainingNewsFeed)
         
-        dataSource.apply(snapShot, animatingDifferences: true)
+        dataSource.apply(snapShot, animatingDifferences: false)
     }
     
 }
