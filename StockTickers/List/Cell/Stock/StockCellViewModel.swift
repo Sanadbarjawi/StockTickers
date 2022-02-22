@@ -11,7 +11,8 @@ import Combine
 final class StockCellViewModel {
     @Published var stockName: String = ""
     @Published var price: String = ""
-        
+    @Published var isIncreasing: Bool = false
+
     private let stock: Stock
     
     init(stock: Stock) {
@@ -23,5 +24,6 @@ final class StockCellViewModel {
     private func setUpBindings() {
         stockName = stock.title
         price = stock.value.toUSD2() ?? "-"
+        isIncreasing = price.starts(with: "-") == false
     }
 }
