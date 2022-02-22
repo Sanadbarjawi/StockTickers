@@ -4,19 +4,21 @@ a iOS application that can display a stocks
 
 ## Features
  
-* Stocks get refreshed every 1 second 🌪
+* Stocks & prices
+* Newsfeed
 
 ## Project Technicals
 
-- [x] MVVM Archeticture.
+- [x] MVVM Archeticture
 - [x] Combine
-- [x] Unit Testing 🧪
+- [x] Unit Testing 🧪 
 
 ## Getting Started
 
 ### Dependencies
 
 * supporting iOS, with the minimum deployement target of "13.0"
+* Cocoapods dependency manager
 
 ### Want to check it out? follow the steps below:
 1. Clone the project:
