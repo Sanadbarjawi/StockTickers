@@ -16,7 +16,7 @@ struct News: Codable {
 }
 
 // MARK: - Article
-struct Article: Equatable, Hashable, Codable {
+class Article: Equatable, Hashable, Codable {
     
     let identifier = UUID()
 
@@ -44,8 +44,6 @@ extension Article {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)
-        hasher.combine(content)
-        hasher.combine(title)
     }
 }
 
@@ -64,7 +62,5 @@ extension Source {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)
-        hasher.combine(id)
-        hasher.combine(name)
     }
 }

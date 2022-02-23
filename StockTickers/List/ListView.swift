@@ -74,9 +74,9 @@ class ListView: UIView {
             switch section {
             case .stocks:
                 
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .estimated(100), heightDimension: .fractionalHeight(1)))
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
 
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .estimated(1), heightDimension: .absolute(30)), subitems: [item])
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30)), subitems: [item])
                 group.interItemSpacing = .fixed(8)
 
                 let section = NSCollectionLayoutSection(group: group)
@@ -85,7 +85,7 @@ class ListView: UIView {
                 section.contentInsets.trailing = 0
                 section.contentInsets.top = 12
                 
-                section.orthogonalScrollingBehavior = .continuous
+                section.orthogonalScrollingBehavior = .paging
 
                 return section
                 
